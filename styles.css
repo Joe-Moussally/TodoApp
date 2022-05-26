@@ -103,3 +103,9 @@ li > button {
 .fa-trash-can:not(:hover) {
     transition: .2s;
 }
+
+.done span {
+    text-decoration: line-through;
+    text-decoration-color: rgba(0, 0, 0, 0.752);
+    color: rgba(128, 128, 128, 0.844);
+}
