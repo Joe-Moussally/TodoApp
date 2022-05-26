@@ -2,15 +2,38 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
 }
 
 body {
     height: 100vh;
     background: rgb(224,255,0);
-background: linear-gradient(27deg, rgba(224,255,0,1) 0%, rgba(103,208,70,1) 28%, rgba(231,162,0,1) 28%, rgba(223,0,0,1) 50%, rgba(219,0,0,1) 50%, rgba(0,164,236,1) 50%, rgba(114,96,195,1) 77%, rgba(236,217,0,1) 77%, rgba(236,47,0,1) 100%);
+    background: linear-gradient(27deg, rgba(224,255,0,1) 0%, rgba(103,208,70,1) 28%, rgba(231,162,0,1) 28%, rgba(223,0,0,1) 50%, rgba(219,0,0,1) 50%, rgba(0,164,236,1) 50%, rgba(114,96,195,1) 77%, rgba(236,217,0,1) 77%, rgba(236,47,0,1) 100%);
 }
 
 #main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
+}
+
+#todo-panel {
+    width: 500px;
+    height: 600px;
+    background-color: rgb(237, 237, 237);
+    padding: 10px;
+    box-shadow: 0 40px 40px rgba(0, 0, 0, 0.441);
+}
+
+#todo-body {
+    display: flex;
+    width: 100%;
+    font-size: 30px;
+}
+input {
+    width: 100%;
+    height: 40px;
+    font-size: 24px;
 }
