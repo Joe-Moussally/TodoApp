@@ -15,7 +15,11 @@ body {
 }
 
 i {
-    
+    transform: scale(1.9);
+}
+
+button {
+    border: none;
 }
 
 h1 {
@@ -53,6 +57,7 @@ input {
     border-bottom: 1px solid rgba(0, 0, 0, 0.259);
     background: rgba(0, 0, 0, 0.077);
     padding-left: 5px;
+    margin: 10px 0;
 }
 
 input:focus {
@@ -61,4 +66,18 @@ input:focus {
 
 ul {
     list-style: none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+li > button:nth-child(2) {
+    margin-left: auto;
+}
+
+li > button {
+    margin: 0 10px;
 }
