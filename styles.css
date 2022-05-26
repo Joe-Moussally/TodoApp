@@ -72,6 +72,8 @@ li {
     display: flex;
     align-items: center;
     margin: 10px 0;
+    border-bottom: .5px solid rgba(0, 0, 0, 0.167);
+    font-style: italic;
 }
 
 li > button:nth-child(2) {
