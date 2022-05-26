@@ -83,3 +83,23 @@ li > button:nth-child(2) {
 li > button {
     margin: 0 10px;
 }
+
+.fa-check:hover {
+    cursor: pointer;
+    color: greenyellow;
+    transition: .2s;
+}
+
+.fa-check:not(:hover) {
+    transition: .2s;
+}
+
+.fa-trash-can:hover {
+    cursor: pointer;
+    color: crimson;
+    transition: .2s;
+}
+
+.fa-trash-can:not(:hover) {
+    transition: .2s;
+}
