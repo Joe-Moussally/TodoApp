@@ -1,5 +1,7 @@
 const input = document.getElementsByTagName("input")[0];
 const check = document.getElementsByClassName("fa-check");
+const list = document.getElementById("todo-list-ul");
+const done = document.getElementById("todo-list-done");
 
 //adding event listener to text input
 $("input").on('keypress',function(e) {
@@ -21,13 +23,14 @@ const handleKeyPress = (value) => {
 
 //function that handles the delete buttons click
 const handleDelete = (button) => {
-    $(button).parent().fadeOut(300)
+    $(button).parent().fadeOut(150)
 }
 
 //function that handles the check buttons click
 const handleCheck = (button) => {
     $(button).parent().toggleClass('done');
     console.log("Check Clicked!")
+    $("#todo-list-done").prepend($(button).parent());
 }
 
 
