@@ -28,7 +28,18 @@ const handleDelete = (button) => {
 
 //function that handles the edit
 const handleEdit = (button) => {
-    $(button).prev().attr('contentEditable','false');
+    $(button).prev().attr('contentEditable','true');//make can edit attribute true to edit on click
+    $(button).prev().focus();
+
+    //adding event listener to the span tag
+    $(button).prev().on('keypress', (e) => {
+        if(e.which == 13) {
+            $(button).prev().attr('contentEditable','false');//remove can edit from span
+        }
+    });
+    
+
+
 }
 
 //function that handles the check buttons click
