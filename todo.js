@@ -28,9 +28,22 @@ const handleDelete = (button) => {
 
 //function that handles the check buttons click
 const handleCheck = (button) => {
-    $(button).parent().toggleClass('done');
-    console.log("Check Clicked!")
-    $("#todo-list-done").prepend($(button).parent());
+
+    //if todo is not done, remove it and append it to done ul tag
+    if ($(button).parent().prop('className') != 'done') {
+
+        $(button).parent().toggleClass('done');
+        let temp = $(button).parent();
+        $(button).parent().remove();
+        $("#todo-list-done").prepend(temp);
+    } else {
+        $(button).parent().toggleClass('done');
+        let temp = $(button).parent();
+        $(button).parent().remove();
+        $("#todo-list-ul").prepend(temp);
+    }
+
+
 }
 
 
