@@ -39,6 +39,7 @@ h1 {
 #todo-panel {
     width: 500px;
     height: fit-content;
+    min-height: 550px;
     background-color: rgb(237, 237, 237);
     padding: 10px;
     box-shadow: 0 40px 40px rgba(0, 0, 0, 0.441);

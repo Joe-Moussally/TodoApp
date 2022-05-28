@@ -42,7 +42,7 @@ const handleCheck = (button) => {
 
 //function that appends the Todo content to ul tag
 const addTodo = (todo) => {
-    $('#todo-list-ul').append('<li><span>Get ketchup</span><i class="fa-solid fa-check"></i><i class="fa-solid fa-trash-can"></i></li>')
+    $('#todo-list-ul').append('<li><span>'+todo+'</span><i class="fa-solid fa-check"></i><i class="fa-solid fa-trash-can"></i></li>')
     //adding event listeners to new todos
     $('.fa-check').on('click', (e) => {
         handleCheck(e.target);
