@@ -82,5 +82,19 @@ const handleCheck = (button) => {
 const addTodo = (task) => {
 
     let temp = new todo(task,5);
+    let x = localStorage.getItem('todos');
+    $(x).prepend(temp);
+    localStorage.setItem('todos',x)
+    console.log(localStorage.getItem('todos'))
     $('#todo-list-ul').prepend('<li><span contentEditable="false">'+temp.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
 }
+
+//function that refreshes the list on any modification and refresh
+//update()
+
+if (localStorage.getItem('todos') === null || localStorage.getItem('todos') === 'null') {
+    localStorage.setItem('todos',[])
+    console.log("SET")
+}
+
+console.log(localStorage.getItem('todos'))
