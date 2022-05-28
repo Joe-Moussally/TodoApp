@@ -8,11 +8,10 @@ $('.fa-check').on('click', (e) => {
  })
 
  //adding event listeners to delete buttons
-$('.fa-trash-can').on('click', () => {
+$('.fa-trash-can').on('click', (e) => {
     console.log('Clicked!');
     handleDelete(e.target);
 })
-
 
 //adding event listener to text input
 $("input").on('keypress',function(e) {
@@ -29,6 +28,11 @@ const handleKeyPress = (value) => {
     } else {
         addTodo(value);
     }
+}
+
+//function that handles the check buttons click
+const handleDelete = (button) => {
+    $(button).parent().fadeOut(300)
 }
 
 //function that appends the Todo content to ul tag
