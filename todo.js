@@ -26,6 +26,11 @@ const handleDelete = (button) => {
     $(button).parent().fadeOut(150)
 }
 
+//function that handles the edit
+const handleEdit = (button) => {
+    $(button).prev().attr('contentEditable','false');
+}
+
 //function that handles the check buttons click
 const handleCheck = (button) => {
 
@@ -52,5 +57,5 @@ const handleCheck = (button) => {
 
 //function that appends the Todo content to ul tag
 const addTodo = (todo) => {
-    $('#todo-list-ul').prepend('<li><span>'+todo+'</span><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+    $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
 }

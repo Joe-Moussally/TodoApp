@@ -121,3 +121,14 @@ li > i {
     cursor: pointer;
     color: royalblue;
 }
+
+span:focus {
+    outline: none;
+    color: royalblue;
+    transition: .5s;
+    transform: scale(1.05);
+}
+
+span {
+    transition: .5s;
+}
