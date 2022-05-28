@@ -15,14 +15,14 @@ const check = document.getElementsByClassName("fa-check");
 $("input").on('keypress',function(e) {
     if(e.which == 13) {
         console.log(e,e.currentTarget.value)
-        addTodo(e.currentTarget.value)
+        handleKeyPress(e.currentTarget.value)
         e.currentTarget.value = '';//clear input value
     }
 });
 
 //functions that handles on ENTER press to append to li
 const handleKeyPress = (value) => {
-    if (value == '') {
+    if (value === '') {
         return
     } else {
         addTodo(value);
