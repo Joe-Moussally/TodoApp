@@ -15,6 +15,7 @@ $('.fa-trash-can').on('click', (e) => {
 $("input").on('keypress',function(e) {
     if(e.which == 13) {
         console.log(e,e.currentTarget.value)
+        addTodo(e.currentTarget.value)
         e.currentTarget.value = '';//clear input value
     }
 });
@@ -41,5 +42,12 @@ const handleCheck = (button) => {
 
 //function that appends the Todo content to ul tag
 const addTodo = (todo) => {
-
+    $('#todo-list-ul').append('<li><span>Get ketchup</span><i class="fa-solid fa-check"></i><i class="fa-solid fa-trash-can"></i></li>')
+    //adding event listeners to new todos
+    $('.fa-check').on('click', (e) => {
+        handleCheck(e.target);
+    })
+    $('.fa-trash-can').on('click', (e) => {
+    handleDelete(e.target);
+    })
 }
