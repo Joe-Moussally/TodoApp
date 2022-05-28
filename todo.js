@@ -3,6 +3,12 @@ const check = document.getElementsByClassName("fa-check");
 const list = document.getElementById("todo-list-ul");
 const done = document.getElementById("todo-list-done");
 
+function todo(task,point) {
+
+    this.task = task;
+    this.point = point;
+}
+
 //adding event listener to text input
 $("input").on('keypress',function(e) {
     if(e.which == 13) {
@@ -49,11 +55,6 @@ const handleEdit = (button) => {
     } else {
         $(button).prev().attr('contentEditable','false');//remove can edit from span
     }
-    
-
-    
-
-
 }
 
 //function that handles the check buttons click
@@ -75,12 +76,11 @@ const handleCheck = (button) => {
         $("#todo-list-ul").prepend(temp);
 
     }
-
-
 }
 
-
 //function that appends the Todo content to ul tag
-const addTodo = (todo) => {
-    $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+const addTodo = (task) => {
+
+    let temp = new todo(task,5);
+    $('#todo-list-ul').prepend('<li><span contentEditable="false">'+temp.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
 }
