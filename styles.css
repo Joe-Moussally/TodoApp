@@ -15,7 +15,7 @@ body {
 }
 
 i {
-    transform: scale(1.9);
+    transform: scale(1);
 }
 
 button {
@@ -76,11 +76,11 @@ li {
     font-style: italic;
 }
 
-li > button:nth-child(2) {
+li > i:nth-child(2) {
     margin-left: auto;
 }
 
-li > button {
+li > i {
     margin: 0 10px;
 }
 
