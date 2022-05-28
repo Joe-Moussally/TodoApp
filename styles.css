@@ -111,3 +111,13 @@ li > i {
     text-decoration-color: rgba(0, 0, 0, 0.752);
     color: rgba(128, 128, 128, 0.844);
 }
+
+.fa-pen {
+    transition: .2s;
+    transform: scale(.75);
+}
+
+.fa-pen:hover {
+    cursor: pointer;
+    color: royalblue;
+}

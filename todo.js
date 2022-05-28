@@ -36,11 +36,14 @@ const handleCheck = (button) => {
         let temp = $(button).parent();
         $(button).parent().remove();
         $("#todo-list-done").prepend(temp);
+
     } else {
+        //esle remove it from done list and add it to todo ul
         $(button).parent().toggleClass('done');
         let temp = $(button).parent();
         $(button).parent().remove();
         $("#todo-list-ul").prepend(temp);
+
     }
 
 
