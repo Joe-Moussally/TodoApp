@@ -29,6 +29,11 @@ const handleDelete = (button) => {
 //function that handles the edit
 const handleEdit = (button) => {
     
+    //if todo is done cannot edit
+    if ($(button).parent().prop('className') == 'done') {
+        return
+    }
+
     if ($(button).prev().attr('contentEditable') == 'false') {
 
         $(button).prev().attr('contentEditable','true');//make can edit attribute true to edit on click
