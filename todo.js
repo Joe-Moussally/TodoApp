@@ -3,13 +3,11 @@ const check = document.getElementsByClassName("fa-check");
 
 //adding event listeners to check buttons
 $('.fa-check').on('click', (e) => {
-     console.log('Clicked!',e.target);
      handleCheck(e.target);
  })
 
  //adding event listeners to delete buttons
 $('.fa-trash-can').on('click', (e) => {
-    console.log('Clicked!');
     handleDelete(e.target);
 })
 
@@ -30,10 +28,16 @@ const handleKeyPress = (value) => {
     }
 }
 
-//function that handles the check buttons click
+//function that handles the delete buttons click
 const handleDelete = (button) => {
     $(button).parent().fadeOut(300)
 }
+
+//function that handles the check buttons click
+const handleCheck = (button) => {
+    $(button).parent().toggleClass('done');
+}
+
 
 //function that appends the Todo content to ul tag
 const addTodo = (todo) => {
