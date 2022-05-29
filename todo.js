@@ -34,17 +34,17 @@ const handleDelete = (button) => {
     let todoList = JSON.parse(localStorage.getItem('todos'));
     let taskName = $(button).prev().prev().prev().html();
     console.log(taskName);
-     for (i = 0; i < todoList.length-1; i++) {
-         if (todoList[i].task == taskName) {
-            todoList.pop(i)
-            console.log("Popped")
-         }
-     }
+    todoList.forEach((todo) => {
+        if (todo.task == taskName) {
+            todoList.pop(todoList.indexOf(todo))
+        }
+    })
 
-     localStorage.setItem('todos',JSON.stringify(todoList));
+    localStorage.setItem('todos',JSON.stringify(todoList));
      
 
     $(button).parent().fadeOut(150)
+    refresh();
 }
 
 //function that handles the edit
