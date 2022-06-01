@@ -238,7 +238,7 @@ const sort = (doneArray,notDoneArray) => {
         $('#todo-list-ul').prepend('<li><div class = "todo-info-container"><span contentEditable="false">'+todo.task+'</span><span class = "point">Point: '+todo.point+'</span></div><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.currentTarget)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.currentTarget)"></i></li>')
     } )
     Done.forEach( (todo) => {
-        $('#todo-list-done').prepend('<li class = "done"><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+        $('#todo-list-done').prepend('<li class = "done"><div class = "todo-info-container"><span contentEditable="false">'+todo.task+'</span><span class = "point">Point: '+todo.point+'</span></div><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
     } )
     
     localStorage.setItem('done',JSON.stringify(Done));
