@@ -138,10 +138,11 @@ span {
     padding-bottom: 5px;
     display: flex;
     justify-content: space-evenly;
+    height: 40px;
 }
 
 #point-container {
-    width: 40%;
+    width: 30%;
     border: 1px red solid;
     display: flex;
     align-items: center;
@@ -159,4 +160,26 @@ span {
 #point-container select:focus {
     outline: 3px rgba(83, 83, 83, 0.207) solid;
     
+}
+
+#sort-container {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    border: 2px red solid;
+}
+
+#sort-container input {
+    font-size: 10px;
+    margin: 0 10px;
+    width: 20px;
+}
+
+#sort-container label {
+    color: rgba(0, 0, 0, 0.356);
+    font-weight: 600;
+}
+
+#date {
+    margin-right: 50px;
 }
