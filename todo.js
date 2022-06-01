@@ -201,10 +201,18 @@ const sort = (array) => {
         console.log('point sort')
         //sorting Done by point
         notDone.sort( (todo1,todo2) => {
-            return (todo1.point < todo2.point) ? 1 : -1;
+            return (todo1.point > todo2.point) ? 1 : -1;
         })
-        console.log('sorted',notDone)
     }
+
+    //append not done todos li's after sorting
+    notDone.forEach((todo) => {
+        $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+    })
+    //append done todos li's after sorting
+    Done.forEach((todo) => {
+        $('#todo-list-done').prepend('<li class = "done"><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+    })
 
 }
 
