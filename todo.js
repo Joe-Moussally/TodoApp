@@ -1,9 +1,9 @@
-const input = document.getElementsByTagName("input")[0];
-const check = document.getElementsByClassName("fa-check");
-const list = document.getElementById("todo-list-ul");
+const input = $("input")[0];
+const check = $(".fa-check");
+const list = $("#todo-list-ul");
 const done = document.getElementById("todo-list-done");
 
-
+//todo class
 class todo {
     constructor(task,point,done,dayCreated,timeCreated){
         let today = new Date()
@@ -66,7 +66,6 @@ const handleDelete = (button) => {
     })
 
     localStorage.setItem('todos',JSON.stringify(todoList));
-     
 
     $(button).parent().fadeOut(150)
     refresh();
@@ -137,8 +136,6 @@ const handleCheck = (button) => {
     })
 }
 
-
-
 //function that updates the list and displays it
 const refresh = () => {
     let todoList = JSON.parse(localStorage.getItem('todos'));
@@ -149,6 +146,7 @@ const refresh = () => {
         todoArray = todoList;
     }
 
+    //empty the list then repopulate
     $('#todo-list-ul').empty();
     $('#todo-list-done').empty();
 
@@ -161,6 +159,24 @@ const refresh = () => {
         
     })
 }
+
+//function that sorts list by date
+const sortByDate = (array) => {
+
+    $('#todo-list-ul').empty();
+    //store not done todos in an array called notDone
+    let notDone = [];
+
+    array.forEach((todo) => {
+        if (todo.done == true) {
+            notDone.push(todo)
+        }
+    })
+    console.log(array)
+
+}
+
+sortByDate(JSON.parse(localStorage.getItem('todos')))
 
 refresh()
 

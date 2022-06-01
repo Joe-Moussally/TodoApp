@@ -132,3 +132,31 @@ span:focus {
 span {
     transition: .5s;
 }
+
+#options {
+    border-bottom: .7px rgb(128, 128, 128) solid;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#point-container {
+    width: 40%;
+    border: 1px red solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#point-container select {
+    transform: translateY(.5px);
+    width: 30%;
+    font-size: 21px;
+    border: 2px rgba(83, 83, 83, 0.377) solid;
+    border-radius: 5px;
+}
+
+#point-container select:focus {
+    outline: 3px rgba(83, 83, 83, 0.207) solid;
+    
+}
