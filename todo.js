@@ -1,7 +1,15 @@
 const input = $("input")[0];
 const check = $(".fa-check");
 const list = $("#todo-list-ul");
-const done = document.getElementById("todo-list-done");
+const done = $("#todo-list-done");
+
+//radio date
+const dateRadio = $('#1')[0]
+//point radio
+const pointRadio = $('#2')[0]
+
+//point select input
+var pointSelect = $('#point'); //.find(":selected").val() to get the value of selected option from select
 
 //todo class
 class todo {
@@ -36,7 +44,11 @@ const handleKeyPress = (value) => {
 //function that appends the Todo content to ul tag
 const addTodo = (task) => {
     let todoList = JSON.parse(localStorage.getItem('todos'));
-    let temp = new todo(task,5,false);
+
+    //check point chosen by user
+    let point = pointSelect.find(":selected").val()
+    console.log(point)
+    let temp = new todo(task,point,false);
 
     if (todoList === null) {
         todoArray = [];
@@ -161,22 +173,26 @@ const refresh = () => {
 }
 
 //function that sorts list by date
-const sortByDate = (array) => {
+const sort = (array) => {
 
     $('#todo-list-ul').empty();
     //store not done todos in an array called notDone
     let notDone = [];
+    let Done = [];
 
+    //seperation done tasks with not done tasks
     array.forEach((todo) => {
         if (todo.done == true) {
             notDone.push(todo)
+        } else {
+            Done.push(todo)
         }
     })
-    console.log(array)
+    console.log(Done,notDone)
 
 }
 
-sortByDate(JSON.parse(localStorage.getItem('todos')))
+// sort(JSON.parse(localStorage.getItem('todos')))
 
 refresh()
 

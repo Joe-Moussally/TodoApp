@@ -64,8 +64,12 @@ h1 {
 #todo-input-container select {
     transform: translateY(.5px);
     font-size: 21px;
-    border: 2px rgba(83, 83, 83, 0.377) solid;
+    border: 2px rgba(83, 83, 83, 0.508) solid;
     border-radius: 5px;
+}
+
+#todo-input-container select:focus {
+    outline: 3px rgba(83, 83, 83, 0.207) solid;
 }
 
 input {
@@ -151,7 +155,7 @@ span {
 }
 
 #options {
-    border-bottom: .7px rgb(128, 128, 128) solid;
+    border-bottom: 2px rgb(128, 128, 128) solid;
     padding-bottom: 5px;
     display: flex;
     justify-content: flex-start;
@@ -168,13 +172,6 @@ span {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-}
-
-
-
-#point-container select:focus {
-    outline: 3px rgba(83, 83, 83, 0.207) solid;
-    
 }
 
 #sort-container {
