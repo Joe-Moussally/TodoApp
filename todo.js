@@ -3,6 +3,9 @@ const check = $(".fa-check");
 const list = $("#todo-list-ul");
 const done = $("#todo-list-done");
 
+localStorage.setItem('done',JSON.stringify([]))
+localStorage.setItem('notdone',JSON.stringify([]))
+
 //radio date
 const dateRadio = $('#1')[0]
 //point radio
@@ -52,41 +55,59 @@ const handleKeyPress = (value) => {
 
 //function that appends the Todo content to ul tag
 const addTodo = (task) => {
-    let todoList = JSON.parse(localStorage.getItem('todos'));
+    let notDone = JSON.parse(localStorage.getItem('notdone'));
 
     //check point chosen by user
     let point = pointSelect.find(":selected").val()
     console.log(point)
     let temp = new todo(task,point,false);
 
-    if (todoList === null) {
-        todoArray = [];
-    } else {
-        todoArray = todoList;
+    if (notDone === null) {
+        notDone = [];
     }
     
-    todoArray.push(temp);
-    console.log(todoArray)
-    localStorage.setItem('todos',JSON.stringify(todoArray))
+    notDone.push(temp);
+    console.log(notDone,"PASSED")
+    localStorage.setItem('notdone',JSON.stringify(notDone))
     refresh();
 
-    console.log(temp.dayCreated,"ASD",temp.timeCreated)
-    
     // $('#todo-list-ul').prepend('<li><span contentEditable="false">'+temp.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
 }
 
 //function that handles the delete buttons click
 const handleDelete = (button) => {
-    let todoList = JSON.parse(localStorage.getItem('todos'));
-    let taskName = $(button).prev().prev().prev().html();
-    console.log(taskName);
-    todoList.forEach((todo) => {
-        if (todo.task == taskName) {
-            todoList.pop(todoList.indexOf(todo))
-        }
-    })
+    let Done = JSON.parse(localStorage.getItem('done'));
+    let notDone = JSON.parse(localStorage.getItem('notdone'))
 
-    localStorage.setItem('todos',JSON.stringify(todoList));
+    let taskName = $(button).prev().prev().prev().html();
+    let status = $(button).parent().attr('class');//if class of li is done or not
+    console.log("STATUS",status);
+
+    if (status == 'done') {
+        
+        Done.forEach((todo) => {
+            if (todo.task == taskName) {
+                Done.pop(Done.indexOf(todo))
+            }
+        })
+    } else {
+
+        notDone.forEach((todo) => {
+            if (todo.task == taskName) {
+                notDone.pop(notDone.indexOf(todo))
+            }
+        })
+    }
+    
+    console.log("Taskname",taskName);
+    // todoList.forEach((todo) => {
+    //     if (todo.task == taskName) {
+    //         todoList.pop(todoList.indexOf(todo))
+    //     }
+    // })
+
+    localStorage.setItem('done',JSON.stringify(Done));
+    localStorage.setItem('notdone',JSON.stringify(notDone));
 
     $(button).parent().fadeOut(150)
     refresh();
@@ -159,13 +180,16 @@ const handleCheck = (button) => {
 
 //function that updates the list and displays it
 const refresh = () => {
-    let todoList = JSON.parse(localStorage.getItem('todos'));
+    let Done = JSON.parse(localStorage.getItem('done'));
+    let notDone = JSON.parse(localStorage.getItem('notdone'));
 
-    if (todoList === null) {
-        todoArray = [];
-    } else {
-        todoArray = todoList;
+    if (Done === null) {
+        Done = [];
     }
+    if (notDone === null) {
+        notDone = [];
+    }
+
 
     //empty the list then repopulate
     $('#todo-list-ul').empty();
@@ -179,30 +203,22 @@ const refresh = () => {
     //     }
         
     // })
-    sort(todoArray)
+    sort(Done,notDone)//Done notDone
 }
 
 //function that sorts list by date or point
-const sort = (array) => {
+const sort = (doneArray,notDoneArray) => {
 
-    $('#todo-list-ul').empty();
     //store not done todos in an array called notDone
-    let notDone = [];
-    let Done = [];
+    let notDone = notDoneArray;
+    let Done = doneArray;
 
     //seperation done tasks with not done tasks
-    array.forEach((todo) => {
-        if (todo.done == true) {
-            Done.push(todo)
-        } else {
-            notDone.push(todo)
-        }
-    })
 
-    console.log(Done,notDone)
     if (dateRadio.checked) {
 
         //sorting Done by date
+        //--------------------------------------------------------------------
         
 
     } else if (pointRadio.checked) {
@@ -218,7 +234,14 @@ const sort = (array) => {
     notDone.forEach( (todo) => {
         $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.currentTarget)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.currentTarget)"></i></li>')
     } )
+    Done.forEach( (todo) => {
+        $('#todo-list-done').prepend('<li class = "done"><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+    } )
+    
+    localStorage.setItem('done',JSON.stringify(Done));
+    localStorage.setItem('notdone',JSON.stringify(notDone));
 }
+
 //adding event listener to when user checks an option
 $('input[type=radio][name=sort]').change(function() {
     if (this.id == '1') {//date
@@ -230,7 +253,6 @@ $('input[type=radio][name=sort]').change(function() {
     }
 });
 
-sort(JSON.parse(localStorage.getItem('todos')))
 
 refresh()
 
