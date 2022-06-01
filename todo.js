@@ -11,6 +11,9 @@ const pointRadio = $('#2')[0]
 //point select input
 var pointSelect = $('#point'); //.find(":selected").val() to get the value of selected option from select
 
+//get recent selected sort option by user
+let sortType = localStorage.getItem('sort');
+
 //todo class
 class todo {
     constructor(task,point,done,dayCreated,timeCreated){
@@ -189,10 +192,15 @@ const sort = (array) => {
         }
     })
     console.log(Done,notDone)
+    if (dateRadio.checked) {
+        console.log('srt date')
+    } else if (pointRadio.checked) {
+        console.log('point sort')
+    }
 
 }
 
-// sort(JSON.parse(localStorage.getItem('todos')))
+sort(JSON.parse(localStorage.getItem('todos')))
 
 refresh()
 
