@@ -165,14 +165,15 @@ const refresh = () => {
     $('#todo-list-ul').empty();
     $('#todo-list-done').empty();
 
-    todoArray.forEach((todo) => {
-        if (todo.done == true) {
-            $('#todo-list-done').prepend('<li class = "done"><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
-        } else {
-            $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
-        }
+    // todoArray.forEach((todo) => {
+    //     if (todo.done == true) {
+    //         $('#todo-list-done').prepend('<li class = "done"><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+    //     } else {
+    //         $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+    //     }
         
-    })
+    // })
+    sort(todoArray)
 }
 
 //function that sorts list by date
@@ -186,16 +187,23 @@ const sort = (array) => {
     //seperation done tasks with not done tasks
     array.forEach((todo) => {
         if (todo.done == true) {
-            notDone.push(todo)
-        } else {
             Done.push(todo)
+        } else {
+            notDone.push(todo)
         }
     })
+
     console.log(Done,notDone)
     if (dateRadio.checked) {
         console.log('srt date')
+        //sorting Done by date
     } else if (pointRadio.checked) {
         console.log('point sort')
+        //sorting Done by point
+        notDone.sort( (todo1,todo2) => {
+            return (todo1.point < todo2.point) ? 1 : -1;
+        })
+        console.log('sorted',notDone)
     }
 
 }
