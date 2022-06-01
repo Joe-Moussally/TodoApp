@@ -56,7 +56,7 @@ const addTodo = (task) => {
 
     //check point chosen by user
     let point = pointSelect.find(":selected").val()
-    console.log(point)
+    console.log("point:",point)
     let temp = new todo(task,point,false);
 
     if (notDone === null) {
@@ -98,7 +98,6 @@ const handleDelete = (button) => {
         })
     }
     
-    console.log("Taskname",taskName);
     // todoList.forEach((todo) => {
     //     if (todo.task == taskName) {
     //         todoList.pop(todoList.indexOf(todo))
@@ -108,7 +107,7 @@ const handleDelete = (button) => {
     localStorage.setItem('done',JSON.stringify(Done));
     localStorage.setItem('notdone',JSON.stringify(notDone));
 
-    $(button).parent().fadeOut(150)
+    $(button).parent().fadeOut(200)
     refresh();
 }
 
@@ -140,8 +139,13 @@ const handleEdit = (button) => {
 //function that handles the check buttons click
 const handleCheck = (button) => {
 
-    let taskName = $(button).prev().prev().html();
-    let todoList = JSON.parse(localStorage.getItem('todos'));
+    let Done = JSON.parse(localStorage.getItem('done'));
+    let notDone = JSON.parse(localStorage.getItem('notdone'));
+
+    //targeting element with todo task name
+    let taskNameSpan = $(button).prev().prev().prev().children('span')[0];
+    //targeting innerHTML of span with todo task
+    let taskName = $(taskNameSpan).html()
 
     //if todo is not done, remove it and append it to done ul tag
     if ($(button).parent().prop('className') != 'done') {
@@ -224,7 +228,7 @@ const sort = (doneArray,notDoneArray) => {
         
         //sorting Done by point
         notDone.sort( (todo1,todo2) => {
-            return (todo1.point > todo2.point) ? 1 : -1;//return 1 if point2 smaller than point1 i.e. sort by point property in ascending order
+            return (todo1.point < todo2.point) ? 1 : -1;//return 1 if point2 smaller than point1 i.e. sort by point property in ascending order
         })
 
     }
