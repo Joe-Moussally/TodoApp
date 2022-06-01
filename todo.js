@@ -13,7 +13,7 @@ var pointSelect = $('#point'); //.find(":selected").val() to get the value of se
 
 //get recent selected sort option by user
 let sortType = localStorage.getItem('sort');
-console.log('sorttype',sortType)
+//check the radio sort type for the the user chose last
 if (sortType == 'point') {
     $(pointRadio).prop("checked", true);
 } else {
@@ -182,7 +182,7 @@ const refresh = () => {
     sort(todoArray)
 }
 
-//function that sorts list by date
+//function that sorts list by date or point
 const sort = (array) => {
 
     $('#todo-list-ul').empty();
@@ -201,19 +201,22 @@ const sort = (array) => {
 
     console.log(Done,notDone)
     if (dateRadio.checked) {
-        console.log('srt date')
+
         //sorting Done by date
+        
+
     } else if (pointRadio.checked) {
-        console.log('point sort')
+        
         //sorting Done by point
         notDone.sort( (todo1,todo2) => {
-            return (todo1.point > todo2.point) ? 1 : -1;
+            return (todo1.point > todo2.point) ? 1 : -1;//return 1 if point2 smaller than point1 i.e. sort by point property in ascending order
         })
+
     }
 
     //append li's after sorting
     notDone.forEach( (todo) => {
-        $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+        $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.currentTarget)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.currentTarget)"></i></li>')
     } )
 }
 //adding event listener to when user checks an option
