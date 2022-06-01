@@ -191,3 +191,14 @@ span {
     font-weight: 600;
     margin-right: 25px;
 }
+
+.todo-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.point {
+    color: rgb(94, 187, 0);
+    font-size: 23px;
+    font-style: normal;
+}

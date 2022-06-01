@@ -3,9 +3,6 @@ const check = $(".fa-check");
 const list = $("#todo-list-ul");
 const done = $("#todo-list-done");
 
-localStorage.setItem('done',JSON.stringify([]))
-localStorage.setItem('notdone',JSON.stringify([]))
-
 //radio date
 const dateRadio = $('#1')[0]
 //point radio
@@ -79,9 +76,11 @@ const handleDelete = (button) => {
     let Done = JSON.parse(localStorage.getItem('done'));
     let notDone = JSON.parse(localStorage.getItem('notdone'))
 
-    let taskName = $(button).prev().prev().prev().html();
+    //targeting element with todo task name
+    let taskNameSpan = $(button).prev().prev().prev().children('span')[0];
+    //targeting innerHTML of span with todo task
+    let taskName = $(taskNameSpan).html()
     let status = $(button).parent().attr('class');//if class of li is done or not
-    console.log("STATUS",status);
 
     if (status == 'done') {
         
@@ -206,7 +205,7 @@ const refresh = () => {
     sort(Done,notDone)//Done notDone
 }
 
-//function that sorts list by date or point
+//function that sorts list by date or point and appends it to <ul>
 const sort = (doneArray,notDoneArray) => {
 
     //store not done todos in an array called notDone
@@ -232,7 +231,7 @@ const sort = (doneArray,notDoneArray) => {
 
     //append li's after sorting
     notDone.forEach( (todo) => {
-        $('#todo-list-ul').prepend('<li><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.currentTarget)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.currentTarget)"></i></li>')
+        $('#todo-list-ul').prepend('<li><div class = "todo-info-container"><span contentEditable="false">'+todo.task+'</span><span class = "point">Point: '+todo.point+'</span></div><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.currentTarget)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.currentTarget)"></i></li>')
     } )
     Done.forEach( (todo) => {
         $('#todo-list-done').prepend('<li class = "done"><span contentEditable="false">'+todo.task+'</span><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
@@ -243,7 +242,7 @@ const sort = (doneArray,notDoneArray) => {
 }
 
 //adding event listener to when user checks an option
-$('input[type=radio][name=sort]').change(function() {
+$('input[type=radio][name=sort]').change( () => {
     if (this.id == '1') {//date
         localStorage.setItem('sort','date')
         refresh()
