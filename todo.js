@@ -200,6 +200,17 @@ const sort = (array) => {
 
 }
 
+//adding event listener to when user checks an option
+$('input[type=radio][name=sort]').change(function() {
+    if (this.id == '1') {//date
+        localStorage.setItem('sort','date')
+        refresh()
+    }else if (this.id == '2') {//point
+        localStorage.setItem('sort','sort')
+        refresh()
+    }
+});
+
 sort(JSON.parse(localStorage.getItem('todos')))
 
 refresh()
