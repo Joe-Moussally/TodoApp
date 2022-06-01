@@ -18,12 +18,9 @@
 
             <div id="todo-body">
 
-                <input type="text" placeholder="What's on your mind?">
-
-                <div id="options">
-                    
-                    <div id="point-container">
-                        <label for="point">Point</label>
+                <div id="todo-input-container">
+                    <input type="text" placeholder="What's on your mind?">
+                    <label for="point">Point</label>
                         <select name="point" id="point">
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -31,8 +28,11 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                    </div>
+                </div>
 
+                <div id="options">
+
+                    <span>Sort by: </span>
                     <div id="sort-container">
                         <input type="radio" id="1" name="sort" value="HTML">
                         <label for="1">Date</label>

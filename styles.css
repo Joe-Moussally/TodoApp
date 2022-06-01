@@ -51,8 +51,23 @@ h1 {
     width: 100%;
     font-size: 30px;
 }
-input {
+
+#todo-input-container {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
+    align-items: center;
+}
+
+#todo-input-container select {
+    transform: translateY(.5px);
+    font-size: 21px;
+    border: 2px rgba(83, 83, 83, 0.377) solid;
+    border-radius: 5px;
+}
+
+input {
+    width: 70%;
     height: 40px;
     font-size: 24px;
     border: none;
@@ -137,25 +152,23 @@ span {
     border-bottom: .7px rgb(128, 128, 128) solid;
     padding-bottom: 5px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     height: 40px;
+    align-items: center;
+}
+
+#options span {
+    transform: translateY(-4px);
 }
 
 #point-container {
     width: 30%;
-    border: 1px red solid;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
-#point-container select {
-    transform: translateY(.5px);
-    width: 30%;
-    font-size: 21px;
-    border: 2px rgba(83, 83, 83, 0.377) solid;
-    border-radius: 5px;
-}
+
 
 #point-container select:focus {
     outline: 3px rgba(83, 83, 83, 0.207) solid;
@@ -166,7 +179,6 @@ span {
     width: fit-content;
     display: flex;
     align-items: center;
-    border: 2px red solid;
 }
 
 #sort-container input {
@@ -178,8 +190,10 @@ span {
 #sort-container label {
     color: rgba(0, 0, 0, 0.356);
     font-weight: 600;
+    margin-right: 25px;
 }
 
 #date {
     margin-right: 50px;
 }
+
