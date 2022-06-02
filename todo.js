@@ -123,18 +123,18 @@ const handleEdit = (button) => {
     let content = $(button).prev().children('span')[0]
     if ($(content).prop('contentEditable') == 'false') {
 
-        $(button).prev().attr('contentEditable','true');//make can edit attribute true to edit on click
-        $(button).prev().focus();
+        $(content).attr('contentEditable','true');//make can edit attribute true to edit on click
+        $(content).focus();
     
         //adding event listener to the span tag
-        $(button).prev().on('keypress', (e) => {
+        $(content).on('keypress', (e) => {
             if(e.which == 13) {
-                $(button).prev().attr('contentEditable','false');//remove can edit from span
+                $(content).attr('contentEditable','false');//remove can edit from span
             }
         });
 
     } else {
-        $(button).prev().attr('contentEditable','false');//remove can edit from span
+        $(content).attr('contentEditable','false');//remove can edit from span
     }
 }
 
