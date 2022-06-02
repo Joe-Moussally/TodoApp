@@ -164,28 +164,31 @@ const handleCheck = (button) => {
 
     // }
 
+    console.log(taskName)
 
+    let status = $(button).parent().prop('className')
+    console.log(status)
 
-    Done.forEach((todo) => {
-        if (todo.task == taskName) {
-            console.log(JSON.parse(localStorage.getItem('notdone')))
-            todo.done = false;
-            let temp = todo;
-            Done.pop(todo);
-            notDone.push(temp);
-        }
-    })
-
-    console.log("Taskname",taskNameSpan)
-    notDone.forEach((todo) => {
-        if (todo.task == taskName) {
-            console.log(JSON.parse(localStorage.getItem('notdone')))
-            todo.done = true;
-            let temp = todo;
-            notDone.pop(todo);
-            Done.push(temp);
-        }
-    })
+    if (status === 'done') {
+        Done.forEach((todo) => {
+            if (todo.task == taskName) {
+                let temp = todo;
+                todo.done = false;
+                console.log("CHANGED")
+                Done.pop(Done.indexOf(todo));
+                notDone.push(temp);
+            }
+        })
+    } else {
+        notDone.forEach((todo) => {
+            if (todo.task == taskName) {
+                let temp = todo;
+                todo.done = true;
+                notDone.pop(notDone.indexOf(todo));
+                Done.push(temp);
+            }
+        })
+    }
 
     localStorage.setItem('notdone',JSON.stringify(notDone))
     localStorage.setItem('done',JSON.stringify(Done))
@@ -218,6 +221,8 @@ const refresh = () => {
         
     // })
     sort(Done,notDone)//Done notDone
+    console.log("Done",Done)
+    console.log("not done",notDone)
 }
 
 //function that sorts list by date or point and appends it to <ul>
@@ -254,6 +259,7 @@ const sort = (doneArray,notDoneArray) => {
     
     localStorage.setItem('done',JSON.stringify(Done));
     localStorage.setItem('notdone',JSON.stringify(notDone));
+
 }
 
 //adding event listener to when user checks an option
