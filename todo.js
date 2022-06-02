@@ -295,14 +295,16 @@ const sort = (doneArray,notDoneArray) => {
 }
 
 //adding event listener to when user checks an option
-$('input[type=radio][name=sort]').change( () => {
-    if (this.id == '1') {//date
-        localStorage.setItem('sort','date')
-        refresh()
-    }else if (this.id == '2') {//point
+
+$(pointRadio).click( () => {
         localStorage.setItem('sort','point')
+        console.log("CLICKED")
         refresh()
-    }
+});
+$(dateRadio).click( () => {
+    localStorage.setItem('sort','date')
+    console.log("CLICKED")
+    refresh()
 });
 
 
