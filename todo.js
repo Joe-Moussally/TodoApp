@@ -137,11 +137,14 @@ const handleEdit = (button) => {
         $(taskSpan).on('keypress', (e) => {
             if(e.which == 13) {
                 $(button).prev().attr('contentEditable','false');//remove can edit from span
+                $(taskSpan).attr('contentEditable','false')
             }
         });
 
-    } else {
-        $(button).prev().attr('contentEditable','false');//remove can edit from span
+        $(taskSpan).focusout(() => {
+
+        })
+
     }
 }
 
