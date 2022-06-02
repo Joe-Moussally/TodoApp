@@ -278,7 +278,7 @@ const sort = (doneArray,notDoneArray) => {
         
         //sorting Done by point
         notDone.sort( (todo1,todo2) => {
-            return ((todo1.point < todo2.point) ? notDone.sort((todo1,todo2)=> {return(todo1.timeCreated < todo2.timeCreated)? 1:-1}) : -1);//return 1 if point2 smaller than point1 i.e. sort by point property in ascending order
+            return ((todo1.point < todo2.point) ? 1 : -1);//return 1 if point2 smaller than point1 i.e. sort by point property in ascending order
         })
 
     }
