@@ -128,13 +128,11 @@ const handleEdit = (button) => {
         return
     }
 
-    console.log("Content",$(button).prev().children('span')[0])
-    let content = $(button).prev().children('span')[0]
-    if ($(taskNameSpan).prop('contentEditable') == 'false') {
-        console.log("HERE")
+    if ($(button).prev().attr('contentEditable') == 'false') {
 
         $(taskNameSpan).attr('contentEditable','true');//make can edit attribute true to edit on click
         $(taskNameSpan).focus();
+        console.log("HERE")
     
         //adding event listener to the span tag
         $(taskNameSpan).on('keypress', (e) => {
@@ -188,6 +186,8 @@ const handleCheck = (button) => {
     //     $("#todo-list-ul").prepend(temp);
 
     // }
+
+    console.log(taskName)
 
     let status = $(button).parent().prop('className')
     console.log(status)
