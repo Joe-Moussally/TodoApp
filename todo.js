@@ -114,21 +114,19 @@ const handleDelete = (button) => {
 //function that handles the edit
 const handleEdit = (button) => {
 
-    let Done = JSON.parse(localStorage.getItem('done'));
-    
+    let divContainer = $(button).prev()[0]
+    let taskSpan = $(divContainer).children('span')[0];
+    let notDone = JSON.parse(localStorage.getItem('done'));
+    let taskName = $(taskSpan).html();
+    let taskNameBefore = $(taskSpan).html();//a value to be compared with later when updating the new value
     //if todo is done cannot edit
     if ($(button).parent().prop('className') == 'done') {
         return
     }
-
-    // let taskSpan = $(button).prev().children('span')[0]
     
-    let divContainer = $(button).prev()[0]
-    let taskSpan = $(divContainer).children('span')[0]
 
     if ($(taskSpan).attr('contentEditable') == 'false') {
         console.log("HERE",taskSpan,divContainer)
-        // $(button).prev().attr('contentEditable','true');//make can edit attribute true to edit on click
 
         $(taskSpan).attr('contentEditable','true')
         $(taskSpan).focus();
@@ -142,7 +140,12 @@ const handleEdit = (button) => {
         });
 
         $(taskSpan).focusout(() => {
-
+            
+            notDone.forEach( (todo) => {
+                if (taskNameBefore == todo.task) {
+                    todo.task = taskName;//applying the new task name the todo.task
+                }
+            })
         })
 
     }
