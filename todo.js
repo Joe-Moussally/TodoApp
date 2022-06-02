@@ -14,10 +14,10 @@ var pointSelect = $('#point'); //.find(":selected").val() to get the value of se
 //get recent selected sort option by user
 let sortType = localStorage.getItem('sort');
 //check the radio sort type for the the user chose last
-if (sortType == 'point') {
-    $(pointRadio).prop("checked", true);
-} else {
+if (sortType == 'date') {
     $(dateRadio).prop("checked", true);
+} else {
+    $(pointRadio).prop("checked", true);
 }
 
 //todo class
@@ -143,42 +143,53 @@ const handleCheck = (button) => {
     let notDone = JSON.parse(localStorage.getItem('notdone'));
 
     //targeting element with todo task name
-    let taskNameSpan = $(button).prev().prev().prev().children('span')[0];
+    let taskNameSpan = $(button).prev().prev().children('span')[0];
     //targeting innerHTML of span with todo task
     let taskName = $(taskNameSpan).html()
 
     //if todo is not done, remove it and append it to done ul tag
-    if ($(button).parent().prop('className') != 'done') {
+    // if ($(button).parent().prop('className') != 'done') {
 
-        $(button).parent().toggleClass('done');
-        let temp = $(button).parent();
-        $(button).parent().remove();
-        $("#todo-list-done").prepend(temp);
+    //     $(button).parent().toggleClass('done');
+    //     let temp = $(button).parent();
+    //     $(button).parent().remove();
+    //     $("#todo-list-done").prepend(temp);
+
+    // } else {
+    //     //esle remove it from done list and add it to todo ul
+    //     $(button).parent().toggleClass('done');
+    //     let temp = $(button).parent();
+    //     $(button).parent().remove();
+    //     $("#todo-list-ul").prepend(temp);
+
+    // }
 
 
-    } else {
-        //esle remove it from done list and add it to todo ul
-        $(button).parent().toggleClass('done');
-        let temp = $(button).parent();
-        $(button).parent().remove();
-        $("#todo-list-ul").prepend(temp);
 
-    }
-
-    todoList.forEach((todo) => {
+    Done.forEach((todo) => {
         if (todo.task == taskName) {
-            console.log(JSON.parse(localStorage.getItem('todos')))
-            if (todo.done == false) {
-                todo.done = true;
-                localStorage.setItem('todos',JSON.stringify(todoList))
-            } else {
-                console.log(todo.done)
-                todo.done = false;
-                console.log(todo.done)
-                localStorage.setItem('todos',JSON.stringify(todoList))
-            }
+            console.log(JSON.parse(localStorage.getItem('notdone')))
+            todo.done = false;
+            let temp = todo;
+            Done.pop(todo);
+            notDone.push(temp);
         }
     })
+
+    console.log("Taskname",taskNameSpan)
+    notDone.forEach((todo) => {
+        if (todo.task == taskName) {
+            console.log(JSON.parse(localStorage.getItem('notdone')))
+            todo.done = true;
+            let temp = todo;
+            notDone.pop(todo);
+            Done.push(temp);
+        }
+    })
+
+    localStorage.setItem('notdone',JSON.stringify(notDone))
+    localStorage.setItem('done',JSON.stringify(Done))
+    refresh()
 }
 
 //function that updates the list and displays it
