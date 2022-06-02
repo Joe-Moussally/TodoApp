@@ -114,6 +114,15 @@ const handleDelete = (button) => {
 //function that handles the edit
 const handleEdit = (button) => {
     
+
+    //getting not done todos from local storage
+    let notDone = JSON.parse(localStorage.getItem('notdone'))
+
+    //targeting element with todo task name
+    let taskNameSpan = $(button).prev().children('span')[0];
+    //targeting innerHTML of span with todo task
+    let taskName = $(taskNameSpan).html()
+    
     //if todo is done cannot edit
     if ($(button).parent().prop('className') == 'done') {
         return
@@ -121,20 +130,34 @@ const handleEdit = (button) => {
 
     console.log("Content",$(button).prev().children('span')[0])
     let content = $(button).prev().children('span')[0]
-    if ($(content).prop('contentEditable') == 'false') {
+    if ($(taskNameSpan).prop('contentEditable') == 'false') {
+        console.log("HERE")
 
-        $(content).attr('contentEditable','true');//make can edit attribute true to edit on click
-        $(content).focus();
+        $(taskNameSpan).attr('contentEditable','true');//make can edit attribute true to edit on click
+        $(taskNameSpan).focus();
     
         //adding event listener to the span tag
-        $(content).on('keypress', (e) => {
+        $(taskNameSpan).on('keypress', (e) => {
             if(e.which == 13) {
-                $(content).attr('contentEditable','false');//remove can edit from span
+                $(taskNameSpan).attr('contentEditable','false');//remove can edit from span
+
+                //update new task to local storage
+                
             }
         });
 
-    } else {
-        $(content).attr('contentEditable','false');//remove can edit from span
+        //send new todo to localstorage when focused out
+        $(taskNameSpan).focusout( () => {
+            notDone.forEach( (todo) => {
+                if (todo.task == taskName) {
+                    todo.task = $(taskNameSpan).html()
+                }
+            })
+        })
+
+        localStorage.setItem('notdone',JSON.stringify(notDone))
+        refresh()
+
     }
 }
 
