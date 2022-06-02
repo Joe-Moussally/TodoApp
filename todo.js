@@ -116,10 +116,11 @@ const handleEdit = (button) => {
 
     let divContainer = $(button).prev()[0]
     let taskSpan = $(divContainer).children('span')[0];
-    let notDone = JSON.parse(localStorage.getItem('done'));
+    let notDone = JSON.parse(localStorage.getItem('notdone'));
     let taskName = $(taskSpan).html();
     let taskNameBefore = $(taskSpan).html();//a value to be compared with later when updating the new value
     //if todo is done cannot edit
+
     if ($(button).parent().prop('className') == 'done') {
         return
     }
@@ -136,17 +137,33 @@ const handleEdit = (button) => {
             if(e.which == 13) {
                 $(button).prev().attr('contentEditable','false');//remove can edit from span
                 $(taskSpan).attr('contentEditable','false')
+                taskName = $(taskSpan).html()
+                 notDone.forEach( (todo) => {
+                if (taskNameBefore == todo.task) {
+                    todo.task = taskName;//applying the new task name the todo.task
+                    //update and refresh
+                    localStorage.setItem('notdone',JSON.stringify(notDone));
+                    refresh()
+                }
+            })
             }
         });
 
         $(taskSpan).focusout(() => {
-            
+            taskName = $(taskSpan).html()
             notDone.forEach( (todo) => {
                 if (taskNameBefore == todo.task) {
+                    
                     todo.task = taskName;//applying the new task name the todo.task
+                    //update and refresh
+                    localStorage.setItem('notdone',JSON.stringify(notDone));
+                    refresh()
                 }
             })
+            
         })
+
+        
 
     }
 }
