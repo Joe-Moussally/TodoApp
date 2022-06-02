@@ -119,7 +119,9 @@ const handleEdit = (button) => {
         return
     }
 
-    if ($(button).prev().attr('contentEditable') == 'false') {
+    console.log("Content",$(button).prev().children('span')[0])
+    let content = $(button).prev().children('span')[0]
+    if ($(content).prop('contentEditable') == 'false') {
 
         $(button).prev().attr('contentEditable','true');//make can edit attribute true to edit on click
         $(button).prev().focus();
@@ -163,8 +165,6 @@ const handleCheck = (button) => {
     //     $("#todo-list-ul").prepend(temp);
 
     // }
-
-    console.log(taskName)
 
     let status = $(button).parent().prop('className')
     console.log(status)
