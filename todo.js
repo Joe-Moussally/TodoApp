@@ -270,23 +270,25 @@ const sort = (doneArray,notDoneArray) => {
 
         //sorting Done by date
         //--------------------------------------------------------------------
-        
+        notDone.sort( (todo1,todo2) => {
+            return (todo1.timeCreated > todo2.timeCreated) ? 1 : -1;//return 1 if point2 smaller than point1 i.e. sort by point property in ascending order
+        })
 
     } else if (pointRadio.checked) {
         
         //sorting Done by point
         notDone.sort( (todo1,todo2) => {
-            return (todo1.point < todo2.point) ? 1 : -1;//return 1 if point2 smaller than point1 i.e. sort by point property in ascending order
+            return ((todo1.point < todo2.point) ? notDone.sort((todo1,todo2)=> {return(todo1.timeCreated < todo2.timeCreated)? 1:-1}) : -1);//return 1 if point2 smaller than point1 i.e. sort by point property in ascending order
         })
 
     }
 
     //append li's after sorting
     notDone.forEach( (todo) => {
-        $('#todo-list-ul').prepend('<li><div class = "todo-info-container"><span contentEditable="false">'+todo.task+'</span><span class = "point">Point: '+todo.point+'</span></div><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.currentTarget)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.currentTarget)"></i></li>')
+        $('#todo-list-ul').prepend('<li><div class = "todo-info-container"><span contentEditable="false">'+todo.task+'</span><span class = "point">Point: '+todo.point+'</span><span class = "todo-time">'+todo.dayCreated+'    Time: '+todo.timeCreated+'</span></div><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.currentTarget)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.currentTarget)"></i></li>')
     } )
     Done.forEach( (todo) => {
-        $('#todo-list-done').prepend('<li class = "done"><div class = "todo-info-container"><span contentEditable="false">'+todo.task+'</span><span class = "point">Point: '+todo.point+'</span></div><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
+        $('#todo-list-done').prepend('<li class = "done"><div class = "todo-info-container"><span contentEditable="false">'+todo.task+'</span><span class = "point">Point: '+todo.point+'</span><span class = "todo-time">'+todo.dayCreated+'Time: '+todo.timeCreated+'</span></div><i class="fa-solid fa-pen" onclick="handleEdit(event.currentTarget)"></i><i class="fa-solid fa-check" onclick="handleCheck(event.target)"></i><i class="fa-solid fa-trash-can" onclick="handleDelete(event.target)"></i></li>')
     } )
     
     localStorage.setItem('done',JSON.stringify(Done));

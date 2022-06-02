@@ -202,3 +202,8 @@ span {
     font-size: 23px;
     font-style: normal;
 }
+
+.todo-time {
+    font-size: 19px;
+    color: rgb(0, 46, 84);
+}
