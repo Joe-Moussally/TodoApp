@@ -97,7 +97,7 @@ const handleDelete = (button) => {
             }
         })
     }
-    
+
     // todoList.forEach((todo) => {
     //     if (todo.task == taskName) {
     //         todoList.pop(todoList.indexOf(todo))
@@ -113,49 +113,35 @@ const handleDelete = (button) => {
 
 //function that handles the edit
 const handleEdit = (button) => {
-    
 
-    //getting not done todos from local storage
-    let notDone = JSON.parse(localStorage.getItem('notdone'))
-
-    //targeting element with todo task name
-    let taskNameSpan = $(button).prev().children('span')[0];
-    //targeting innerHTML of span with todo task
-    let taskName = $(taskNameSpan).html()
+    let Done = JSON.parse(localStorage.getItem('done'));
     
     //if todo is done cannot edit
     if ($(button).parent().prop('className') == 'done') {
         return
     }
 
-    if ($(button).prev().attr('contentEditable') == 'false') {
+    // let taskSpan = $(button).prev().children('span')[0]
+    
+    let divContainer = $(button).prev()[0]
+    let taskSpan = $(divContainer).children('span')[0]
 
-        $(taskNameSpan).attr('contentEditable','true');//make can edit attribute true to edit on click
-        $(taskNameSpan).focus();
-        console.log("HERE")
+    if ($(taskSpan).attr('contentEditable') == 'false') {
+        console.log("HERE",taskSpan,divContainer)
+        // $(button).prev().attr('contentEditable','true');//make can edit attribute true to edit on click
+
+        $(taskSpan).attr('contentEditable','true')
+        $(taskSpan).focus();
     
         //adding event listener to the span tag
-        $(taskNameSpan).on('keypress', (e) => {
+        $(taskSpan).on('keypress', (e) => {
             if(e.which == 13) {
-                $(taskNameSpan).attr('contentEditable','false');//remove can edit from span
-
-                //update new task to local storage
-                
+                $(button).prev().attr('contentEditable','false');//remove can edit from span
             }
         });
 
-        //send new todo to localstorage when focused out
-        $(taskNameSpan).focusout( () => {
-            notDone.forEach( (todo) => {
-                if (todo.task == taskName) {
-                    todo.task = $(taskNameSpan).html()
-                }
-            })
-        })
-
-        localStorage.setItem('notdone',JSON.stringify(notDone))
-        refresh()
-
+    } else {
+        $(button).prev().attr('contentEditable','false');//remove can edit from span
     }
 }
 
@@ -187,35 +173,31 @@ const handleCheck = (button) => {
 
     // }
 
-<<<<<<< HEAD
-=======
     console.log(taskName)
 
     let status = $(button).parent().prop('className')
     console.log(status)
->>>>>>> parent of 19b7b82 (Fixing edit)
 
-
-    Done.forEach((todo) => {
-        if (todo.task == taskName) {
-            console.log(JSON.parse(localStorage.getItem('notdone')))
-            todo.done = false;
-            let temp = todo;
-            Done.pop(todo);
-            notDone.push(temp);
-        }
-    })
-
-    console.log("Taskname",taskNameSpan)
-    notDone.forEach((todo) => {
-        if (todo.task == taskName) {
-            console.log(JSON.parse(localStorage.getItem('notdone')))
-            todo.done = true;
-            let temp = todo;
-            notDone.pop(todo);
-            Done.push(temp);
-        }
-    })
+    if (status === 'done') {
+        Done.forEach((todo) => {
+            if (todo.task == taskName) {
+                let temp = todo;
+                todo.done = false;
+                console.log("CHANGED")
+                Done.pop(Done.indexOf(todo));
+                notDone.push(temp);
+            }
+        })
+    } else {
+        notDone.forEach((todo) => {
+            if (todo.task == taskName) {
+                let temp = todo;
+                todo.done = true;
+                notDone.pop(notDone.indexOf(todo));
+                Done.push(temp);
+            }
+        })
+    }
 
     localStorage.setItem('notdone',JSON.stringify(notDone))
     localStorage.setItem('done',JSON.stringify(Done))
@@ -248,6 +230,8 @@ const refresh = () => {
         
     // })
     sort(Done,notDone)//Done notDone
+    console.log("Done",Done)
+    console.log("not done",notDone)
 }
 
 //function that sorts list by date or point and appends it to <ul>
@@ -284,6 +268,7 @@ const sort = (doneArray,notDoneArray) => {
     
     localStorage.setItem('done',JSON.stringify(Done));
     localStorage.setItem('notdone',JSON.stringify(notDone));
+
 }
 
 //adding event listener to when user checks an option
