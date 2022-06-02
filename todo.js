@@ -187,6 +187,13 @@ const handleCheck = (button) => {
 
     // }
 
+<<<<<<< HEAD
+=======
+    console.log(taskName)
+
+    let status = $(button).parent().prop('className')
+    console.log(status)
+>>>>>>> parent of 19b7b82 (Fixing edit)
 
 
     Done.forEach((todo) => {
